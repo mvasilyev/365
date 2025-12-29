@@ -44,16 +44,11 @@ type Service struct {
 	wan *webauthn.WebAuthn
 }
 
-func NewService(db *sql.DB, host string) (*Service, error) {
+func NewService(db *sql.DB, rpid string, origin string) (*Service, error) {
 	wconfig := &webauthn.Config{
 		RPDisplayName: "365 Project",
-		RPID:          host, // "localhost" or domain
-		RPOrigins:     []string{
-            fmt.Sprintf("http://%s", host), 
-            fmt.Sprintf("https://%s", host),
-            fmt.Sprintf("http://%s:8080", host),
-            "http://localhost:8080", 
-        },
+		RPID:          rpid, 
+		RPOrigins:     []string{origin},
 	}
 
 	wan, err := webauthn.New(wconfig)

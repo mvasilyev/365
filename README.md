@@ -60,32 +60,20 @@ cd ..
 go build -o server ./cmd/server
 ```
 
-### 2. Configure WebAuthn Origins
+### 2. Configure Environment
 
-**Critical Step**: You must update the allowed origins for WebAuthn to match your public domain.
-
-Edit `cmd/server/main.go` (around line 45) and `internal/auth/webauthn.go`:
-
-**cmd/server/main.go**:
-```go
-authService, err := auth.NewService(
-    db, 
-    "photos.yourdomain.com", // <--- UPDATE THIS
-    "https://photos.yourdomain.com", // <--- UPDATE THIS
-    "365 Photos",
-)
+Copy the example environment file:
+```bash
+cp .env.example .env
 ```
 
-**internal/auth/webauthn.go**:
-Update `RPOrigins` to include your domain:
-```go
-RPOrigins: []string{
-    "https://photos.yourdomain.com", // <--- ADD YOUR DOMAIN
-    "http://localhost:8080",
-},
+Edit `.env` to match your domain:
+```ini
+APP_DOMAIN=photos.yourdomain.com
+APP_ORIGIN=https://photos.yourdomain.com
 ```
 
-Rebuild the server after these changes.
+The server will automatically load these values.
 
 ### 3. Setup Caddy (Reverse Proxy)
 
