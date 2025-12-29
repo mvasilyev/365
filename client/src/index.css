@@ -1,0 +1,56 @@
+/* Light Mode (Default) */
+:root {
+    --bg-color: #f7f9fc;
+    --text-color: #1a1a1a;
+    --text-muted: #666;
+    --card-bg: #ffffff;
+    --header-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --btn-bg: #eee;
+    --btn-text: #333;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #111;
+        --text-color: #eee;
+        --text-muted: #aaa;
+        --card-bg: #222;
+        --header-bg: #111;
+        --border-color: #333;
+        --btn-bg: #333;
+        --btn-text: #eee;
+    }
+}
+
+[data-theme="dark"] {
+    --bg-color: #111;
+    --text-color: #eee;
+    --text-muted: #aaa;
+    --card-bg: #222;
+    --header-bg: #111;
+    --border-color: #333;
+    --btn-bg: #333;
+    --btn-text: #eee;
+}
+
+[data-theme="light"] {
+    --bg-color: #f7f9fc;
+    --text-color: #1a1a1a;
+    --text-muted: #666;
+    --card-bg: #ffffff;
+    --header-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --btn-bg: #eee;
+    --btn-text: #333;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    margin: 0;
+    line-height: 1.5;
+    transition: background 0.3s, color 0.3s;
+}

@@ -1,0 +1,29 @@
+# Binaries
+server
+*.exe
+*.dll
+
+# Database
+*.db
+*.db-wal
+*.db-shm
+
+# SSL Certificates (Important!)
+*.crt
+*.key
+server.crt
+server.key
+
+# User Content
+uploads/*
+!uploads/.keep
+
+# Node.js
+node_modules/
+client/node_modules/
+npm-debug.log
+client/dist/
+
+# System
+.DS_Store
+.env
