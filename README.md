@@ -14,32 +14,21 @@ A minimal, self-hosted daily photo journaling application. Built with Go (backen
 - **Node.js** (20+)
 - **Caddy** (for HTTPS/Proxy)
 
-## Local Development
+## Quick Start (Automated)
 
-1.  **Backend**:
-    ```bash
-    go mod download
-    go run ./cmd/server
-    ```
-    Runs on `:8080`.
+Run the installation script to configure, build, and setup Caddy automatically:
 
-2.  **Frontend**:
-    ```bash
-    cd client
-    npm install
-    npm run dev
-    ```
-    Runs on `:5173`.
+```bash
+chmod +x install.sh
+./install.sh
+```
 
-3.  **HTTPS (Required for WebAuthn)**:
-    Since WebAuthn requires a secure context (HTTPS) or `localhost`, accessing via a network IP requires a proxy.
-    ```bash
-    # Generate certs (if needed, or use Caddy's auto-internal)
-    go run ./cmd/gen-cert
-    
-    # Run Caddy
-    sudo caddy run
-    ```
+## Manual Installation
+
+If you prefer to set up manually:
+
+### 1. Local Development
+...
 
 ## Custom Domain Deployment
 
