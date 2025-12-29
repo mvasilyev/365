@@ -28,7 +28,31 @@ chmod +x install.sh
 If you prefer to set up manually:
 
 ### 1. Local Development
-...
+
+1.  **Backend**:
+    ```bash
+    go mod download
+    go run ./cmd/server
+    ```
+    Runs on `:8080`.
+
+2.  **Frontend**:
+    ```bash
+    cd client
+    npm install
+    npm run dev
+    ```
+    Runs on `:5173`.
+
+3.  **HTTPS (Required for WebAuthn)**:
+    Since WebAuthn requires a secure context (HTTPS) or `localhost`, accessing via a network IP requires a proxy.
+    ```bash
+    # Generate certs (if needed, or use Caddy's auto-internal)
+    go run ./cmd/gen-cert
+    
+    # Run Caddy
+    sudo caddy run
+    ```
 
 ## Custom Domain Deployment
 
