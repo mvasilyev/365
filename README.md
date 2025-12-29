@@ -103,15 +103,46 @@ Run Caddy:
 caddy run
 ```
 
-### 4. Run the Server
+### 4. Run as a Service (Systemd)
 
-Ensure the `server` binary, `client/dist` folder, and `uploads` folder are in the same directory (or adjust paths).
+To keep the server running in the background and restart on boot, create a systemd service.
 
-```bash
-./server
-```
+1.  **Create Service File**: `/etc/systemd/system/365.service`
 
-Your app should now be live at `https://photos.yourdomain.com`.
+    ```ini
+    [Unit]
+    Description=365 Photo Project
+    After=network.target
+
+    [Service]
+    # Update User and WorkingDirectory to match your setup
+    User=youruser
+    Group=yourgroup
+    WorkingDirectory=/path/to/m365
+    ExecStart=/path/to/m365/server
+    Restart=always
+    RestartSec=5
+    
+    # Environment variables (or load from .env file if supported by your systemd version)
+    # Environment="APP_DOMAIN=photos.yourdomain.com"
+    # Environment="APP_ORIGIN=https://photos.yourdomain.com"
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+
+2.  **Enable and Start**:
+
+    ```bash
+    sudo systemctl daemon-reload
+    sudo systemctl enable 365
+    sudo systemctl start 365
+    ```
+
+3.  **Check Status**:
+    ```bash
+    sudo systemctl status 365
+    ```
 
 ## Security Note
 
