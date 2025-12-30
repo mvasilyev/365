@@ -131,6 +131,11 @@ func (h *Handler) UploadPhoto(w http.ResponseWriter, r *http.Request) {
         w := &exifWalker{exifMap: make(map[string]string)}
         x.Walk(w)
         exifJson, _ = json.Marshal(w.exifMap)
+
+        // Try to get time from EXIF
+        if tm, err := x.DateTime(); err == nil {
+            day = tm.Format("2006-01-02")
+        }
     }
 
     // Generate Thumbnail
