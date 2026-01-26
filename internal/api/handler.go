@@ -125,12 +125,11 @@ func (h *Handler) UploadPhoto(w http.ResponseWriter, r *http.Request) {
                  orientation = val
              }
         }
-        fmt.Printf("Photo %s: Orientation=%d\n", id, orientation)
         
         // Serialize relevant tags (simplified)
-        w := &exifWalker{exifMap: make(map[string]string)}
-        x.Walk(w)
-        exifJson, _ = json.Marshal(w.exifMap)
+        ew := &exifWalker{exifMap: make(map[string]string)}
+        x.Walk(ew)
+        exifJson, _ = json.Marshal(ew.exifMap)
 
         // Try to get time from EXIF
         if tm, err := x.DateTime(); err == nil {
@@ -323,7 +322,7 @@ func (h *Handler) FinishLogin(w http.ResponseWriter, r *http.Request) {
         MaxAge:   3600 * 24 * 30, // 30 days
     })
 
-    fmt.Printf("User %s logged in with credential %v\n", username, credential.ID)
+    _ = credential // validated by FinishLogin
 
     delete(h.Sessions, username)
     w.Write([]byte("Login Success"))
